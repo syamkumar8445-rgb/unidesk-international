@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unidesk International - Premier Study Abroad & Global Education Consultants</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; scroll-behavior: smooth; }
+        body { background-color: #05050a; color: #f3f4f6; overflow-x: hidden; position: relative; }
+
+        .cyber-grid { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background-image: linear-gradient(to right, rgba(99, 102, 241, 0.12) 1px, transparent 1px), linear-gradient(to bottom, rgba(99, 102, 241, 0.12) 1px, transparent 1px); background-size: 60px 60px; transform: perspective(500px) rotateX(60deg); transform-origin: top center; pointer-events: none; z-index: -2; opacity: 0.6; }
+        .orb-1 { position: absolute; top: 100px; left: 20%; width: 350px; height: 350px; background: #6366f1; filter: blur(140px); opacity: 0.3; z-index: -1; border-radius: 50%; }
+        .orb-2 { position: absolute; top: 600px; right: 15%; width: 400px; height: 400px; background: #3b82f6; filter: blur(160px); opacity: 0.25; z-index: -1; border-radius: 50%; }
+
+        header { display: flex; justify-content: space-between; align-items: center; padding: 22px 8%; background: rgba(5, 5, 10, 0.85); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,0.08); position: sticky; top: 0; z-index: 1000; }
+        .logo { font-size: 24px; font-weight: 800; color: #fff; letter-spacing: -0.5px; }
+        .logo span { background: linear-gradient(135deg, #818cf8, #38bdf8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        
+        nav { display: flex; align-items: center; }
+        nav a { margin-left: 25px; text-decoration: none; color: #94a3b8; font-weight: 500; font-size: 15px; transition: 0.3s; }
+        nav a:hover { color: #818cf8; }
+        .btn-login { background: linear-gradient(135deg, #6366f1, #3b82f6); color: white !important; padding: 10px 24px; border-radius: 12px; font-weight: 600; box-shadow: 0 0 25px rgba(99, 102, 241, 0.5); transition: 0.3s; }
+        .btn-login:hover { transform: translateY(-2px); box-shadow: 0 0 35px rgba(99, 102, 241, 0.8); }
+
+        .hero { display: flex; align-items: center; justify-content: space-between; padding: 100px 8%; position: relative; gap: 40px; }
+        .hero-content { max-width: 600px; }
+        .hero-tag { display: inline-flex; align-items: center; gap: 8px; background: rgba(99, 102, 241, 0.15); border: 1px solid rgba(99, 102, 241, 0.4); color: #818cf8; padding: 6px 16px; border-radius: 30px; font-size: 13px; font-weight: 600; margin-bottom: 24px; }
+        .hero-content h1 { font-size: 52px; color: #fff; margin-bottom: 20px; line-height: 1.1; font-weight: 800; letter-spacing: -1.5px; }
+        .hero-content h1 span { background: linear-gradient(135deg, #818cf8, #38bdf8, #c084fc); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero-content p { font-size: 17px; color: #94a3b8; margin-bottom: 35px; line-height: 1.6; }
+        .cta-btn { display: inline-block; background: linear-gradient(135deg, #6366f1, #3b82f6); color: white; padding: 16px 36px; border-radius: 14px; text-decoration: none; font-weight: 600; transition: 0.3s; box-shadow: 0 10px 30px rgba(99,102,241,0.4); }
+        .cta-btn:hover { transform: translateY(-4px); box-shadow: 0 15px 40px rgba(99,102,241,0.7); }
+
+        .hero-3d-box { background: rgba(15, 15, 25, 0.7); border: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(25px); padding: 20px; border-radius: 28px; box-shadow: 0 30px 60px rgba(0, 0, 0, 0.9); transform: perspective(1000px) rotateY(-10deg) rotateX(6deg); transition: 0.5s ease; width: 100%; max-width: 500px; }
+        .hero-3d-box:hover { transform: perspective(1000px) rotateY(0deg) rotateX(0deg); }
+        .hero-3d-box img { width: 100%; height: auto; border-radius: 18px; display: block; }
+
+        .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; padding: 0 8%; margin-top: 20px; }
+        .stat-card { background: rgba(15, 15, 25, 0.6); border: 1px solid rgba(255,255,255,0.06); padding: 35px 20px; border-radius: 20px; text-align: center; backdrop-filter: blur(10px); }
+        .stat-card h3 { font-size: 38px; font-weight: 800; background: linear-gradient(135deg, #818cf8, #38bdf8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .stat-card p { font-size: 14px; color: #94a3b8; margin-top: 8px; font-weight: 500; }
+
+        .section-padding { padding: 100px 8%; }
+        .section-title { text-align: center; margin-bottom: 60px; }
+        .section-title h2 { font-size: 40px; font-weight: 800; color: #fff; }
+        .section-title p { color: #94a3b8; margin-top: 12px; font-size: 16px; max-width: 700px; margin-left: auto; margin-right: auto; line-height: 1.6; }
+
+        .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+        
+        .card-unique { background: rgba(15, 15, 25, 0.6); border: 1px solid rgba(255, 255, 255, 0.07); padding: 40px 30px; border-radius: 22px; transition: all 0.4s ease; backdrop-filter: blur(10px); }
+        .card-unique:hover { transform: translateY(-8px); border-color: rgba(99, 102, 241, 0.5); background: rgba(20, 20, 35, 0.85); box-shadow: 0 20px 40px rgba(0,0,0,0.6); }
+        .card-unique h3 { font-size: 22px; color: #fff; margin-bottom: 12px; font-weight: 700; }
+        .card-unique p { font-size: 14px; color: #94a3b8; line-height: 1.6; }
+
+        .testimonial-card { background: rgba(15, 15, 25, 0.5); border: 1px solid rgba(255,255,255,0.06); padding: 30px; border-radius: 20px; position: relative; }
+        .testimonial-card p { font-size: 15px; color: #cbd5e1; font-style: italic; margin-bottom: 20px; line-height: 1.6; }
+        .student-info h4 { color: #fff; font-size: 16px; font-weight: 700; }
+        .student-info span { font-size: 13px; color: #38bdf8; }
+
+        .faq-container { max-width: 800px; margin: 0 auto; }
+        .faq-item { background: rgba(15, 15, 25, 0.6); border: 1px solid rgba(255,255,255,0.07); padding: 24px; border-radius: 16px; margin-bottom: 16px; }
+        .faq-item h3 { font-size: 18px; color: #fff; margin-bottom: 8px; font-weight: 600; }
+        .faq-item p { font-size: 14px; color: #94a3b8; line-height: 1.5; }
+
+        footer { background: #020205; border-top: 1px solid rgba(255,255,255,0.06); color: #64748b; text-align: center; padding: 40px; font-size: 14px; }
+
+        /* RESPONSIVE DESIGN FOR MOBILE & TABLETS */
+        @media (max-width: 992px) {
+            .hero { flex-direction: column; text-align: center; padding: 60px 5%; }
+            .hero-content { max-width: 100%; }
+            .hero-tag { margin-left: auto; margin-right: auto; }
+            .hero-3d-box { transform: none !important; margin: 0 auto; max-width: 100%; }
+            .stats { grid-template-columns: repeat(2, 1fr); padding: 0 5%; }
+            header { padding: 18px 5%; }
+            nav a { margin-left: 15px; font-size: 14px; }
+            .section-padding { padding: 70px 5%; }
+        }
+
+        @media (max-width: 576px) {
+            .hero-content h1 { font-size: 38px; }
+            .stats { grid-template-columns: 1fr; }
+            nav .hide-mob { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="cyber-grid"></div>
+    <div class="orb-1"></div>
+    <div class="orb-2"></div>
+
+    <header>
+        <div class="logo">Unidesk <span>International</span></div>
+        <nav>
+            <a href="/" class="hide-mob">Home</a>
+            <a href="#destinations" class="hide-mob">Destinations</a>
+            <a href="#services" class="hide-mob">Services</a>
+            <a href="#why-us" class="hide-mob">Why Us</a>
+            <a href="/login" class="btn-login">Student Portal</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <span class="hero-tag">⚡ Next-Gen Study Abroad Ecosystem</span>
+            <h1>Your Gateway to <span>Global Education</span> & Excellence</h1>
+            <p>At Unidesk International, we empower ambitious students to step into world-class universities across the United Kingdom, Canada, Australia, and Europe. Experience seamless, AI-driven documentation, comprehensive career counseling, and flawless visa processing tailored for your future.</p>
+            <a href="/login" class="cta-btn">Student Portal Login / Register</a>
+        </div>
+        <div class="hero-3d-box">
+            <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=600&q=80" alt="Students Studying Abroad">
+        </div>
+    </section>
+
+    <div class="stats">
+        <div class="stat-card"><h3>98%</h3><p>Visa Success Rate</p></div>
+        <div class="stat-card"><h3>250+</h3><p>Partner Universities</p></div>
+        <div class="stat-card"><h3>5000+</h3><p>Students Placed</p></div>
+        <div class="stat-card"><h3>15+</h3><p>Global Offices</p></div>
+    </div>
+
+    <!-- Destinations -->
+    <section class="section-padding" id="destinations">
+        <div class="section-title">
+            <h2>Top Study Destinations</h2>
+            <p>Explore handpicked global education hubs equipped with top-ranked universities, incredible cultural diversity, and lucrative post-study work opportunities.</p>
+        </div>
+        <div class="grid-4">
+            <div class="card-unique"><h3>🇬🇧 United Kingdom</h3><p>Immerse yourself in world-renowned heritage universities offering accelerated degree programs and generous 2-year post-study work rights.</p></div>
+            <div class="card-unique"><h3>🇨🇦 Canada</h3><p>Benefit from top-tier academic standards, welcoming multicultural communities, and exceptionally smooth permanent residency pathways.</p></div>
+            <div class="card-unique"><h3>🇦🇺 Australia</h3><p>Experience an unparalleled lifestyle alongside globally recognized qualifications, vibrant campus life, and high-paying career avenues.</p></div>
+            <div class="card-unique"><h3>🇪🇺 Europe</h3><p>Access high-quality education with zero to remarkably low tuition fees, combined with rich historical exposure across dynamic EU nations.</p></div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section class="section-padding" id="services">
+        <div class="section-title">
+            <h2>Our Comprehensive Core Services</h2>
+            <p>We provide complete, end-to-end management engineered specifically to eliminate stress and guarantee your international academic success.</p>
+        </div>
+        <div class="grid-4">
+            <div class="card-unique"><h3>🎓 Smart Admissions</h3><p>Leverage advanced course matching and priority offer letter processing from elite global institutions through our expert counselors.</p></div>
+            <div class="card-unique"><h3>✈️ Visa Engineering</h3><p>Receive meticulous documentation reviews, financial structuring advice, and rigorous mock visa interview training for 100% approval.</p></div>
+            <div class="card-unique"><h3>💼 Global Scholarships</h3><p>Identify, apply, and secure exclusive merit-based scholarships, financial aid packages, and university bursaries to fund your studies.</p></div>
+            <div class="card-unique"><h3>🏠 Landing Support</h3><p>From seamless airport pickups and safe student accommodation assistance to local part-time job guidance, we stand by you.</p></div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section class="section-padding" id="why-us" style="background: rgba(10, 10, 20, 0.4);">
+        <div class="section-title">
+            <h2>Why Choose Unidesk International?</h2>
+            <p>Discover the core values and structural advantages that make us the most trusted and reliable global education consultancy partner today.</p>
+        </div>
+        <div class="grid-3">
+            <div class="card-unique">
+                <h3>🔍 Absolute Transparency</h3>
+                <p>We maintain strict honesty with zero hidden costs or surprise fees. Enjoy complete real-time tracking of your university applications and visa filing stages directly through your dedicated student portal.</p>
+            </div>
+            <div class="card-unique">
+                <h3>🤝 Direct University Ties</h3>
+                <p>Our official, strong partnerships with top-tier universities worldwide ensure accelerated admissions processing, waiver clearances, and privileged consideration for exclusive student grants.</p>
+            </div>
+            <div class="card-unique">
+                <h3>🎯 Expert Mentorship</h3>
+                <p>Benefit directly from one-on-one counseling sessions conducted by seasoned industry veterans who have successfully paved the international pathways for thousands of ambitious students.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="section-padding" id="testimonials">
+        <div class="section-title">
+            <h2>Student Success Stories</h2>
+            <p>Read genuine testimonials from inspiring students who transformed their professional careers and achieved their global dreams with our support.</p>
+        </div>
+        <div class="grid-3">
+            <div class="testimonial-card">
+                <p>"Unidesk International completely turned my study abroad aspirations into reality. From crafting my Statement of Purpose to rigorous mock visa interviews, their mentorship was beyond exceptional."</p>
+                <div class="student-info">
+                    <h4>Ananya Krishnan</h4>
+                    <span>MSc Computer Science, United Kingdom</span>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <p>"The dedicated online student portal made tracking all my university responses transparent and straightforward. I received my Canada study permit approved seamlessly without any bureaucratic hurdles."</p>
+                <div class="student-info">
+                    <h4>Rahul Menon</h4>
+                    <span>Business Management, Canada</span>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <p>"An exceptionally supportive and knowledgeable team! They assisted me meticulously through every single step to secure a 50% tuition scholarship at an Australian university. Highly recommended!"</p>
+                <div class="student-info">
+                    <h4>Fathima Zahra</h4>
+                    <span>Master of Engineering, Australia</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="section-padding" style="background: rgba(10, 10, 20, 0.4);">
+        <div class="section-title">
+            <h2>Frequently Asked Questions</h2>
+            <p>Have questions regarding admissions, documentation, or visas? Browse through our detailed answers to common inquiries.</p>
+        </div>
+        <div class="faq-container">
+            <div class="faq-item">
+                <h3>When is the ideal time to initiate my study abroad application process?</h3>
+                <p>We strongly recommend initiating your consultation and documentation process at least 6 to 8 months prior to your targeted intake semester (Fall or Spring) to secure admissions and limited scholarships effectively.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Are English proficiency tests like IELTS or TOEFL mandatory for all countries?</h3>
+                <p>While major English-speaking destinations require standardized language proficiency tests, several European institutions offer alternative evaluation criteria or accept medium-of-instruction certificates under specific guidelines.</p>
+            </div>
+            <div class="faq-item">
+                <h3>How can I monitor the live status of my university applications?</h3>
+                <p>By logging into your exclusive personal account on our website's Student Portal, you can review real-time status updates, university offer letters, and immigration milestone progress 24/7.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Unidesk International. Engineered for Global Excellence and Success.</p>
+    </footer>
+
+</body>
+</html>

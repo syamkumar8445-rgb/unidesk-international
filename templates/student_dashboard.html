@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Portal - Unidesk International</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { background-color: #05050a; color: #f3f4f6; padding: 40px 6%; position: relative; min-height: 100vh; overflow-x: hidden; }
+
+        .cyber-grid { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background-image: linear-gradient(to right, rgba(99, 102, 241, 0.12) 1px, transparent 1px), linear-gradient(to bottom, rgba(99, 102, 241, 0.12) 1px, transparent 1px); background-size: 60px 60px; transform: perspective(500px) rotateX(60deg); transform-origin: top center; pointer-events: none; z-index: -2; opacity: 0.6; }
+        .orb-1 { position: absolute; top: 50px; left: 15%; width: 350px; height: 350px; background: #6366f1; filter: blur(140px); opacity: 0.3; z-index: -1; border-radius: 50%; }
+        .orb-2 { position: absolute; top: 400px; right: 10%; width: 400px; height: 400px; background: #3b82f6; filter: blur(160px); opacity: 0.25; z-index: -1; border-radius: 50%; }
+
+        header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 20px; position: relative; z-index: 10; }
+        .logo { font-size: 22px; font-weight: 800; color: #fff; }
+        .logo span { background: linear-gradient(135deg, #818cf8, #38bdf8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .logout-btn { background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); color: #f87171; padding: 8px 18px; border-radius: 8px; text-decoration: none; font-weight: 600; transition: 0.3s; }
+        .logout-btn:hover { background: #ef4444; color: #fff; }
+
+        .welcome-banner { background: rgba(15, 15, 25, 0.75); border: 1px solid rgba(99, 102, 241, 0.3); padding: 25px 30px; border-radius: 20px; margin-bottom: 30px; display: flex; justify-content: space-between; align-items: center; backdrop-filter: blur(15px); position: relative; z-index: 10; flex-wrap: wrap; gap: 15px; }
+        .welcome-banner h2 { font-size: 24px; color: #fff; font-weight: 700; }
+        .welcome-banner p { color: #94a3b8; font-size: 14px; margin-top: 5px; }
+
+        .dashboard-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; position: relative; z-index: 10; }
+        @media (max-width: 900px) { .dashboard-grid { grid-template-columns: 1fr; } }
+
+        .card { background: rgba(15, 15, 25, 0.75); border: 1px solid rgba(255, 255, 255, 0.08); padding: 30px; border-radius: 20px; backdrop-filter: blur(15px); margin-bottom: 30px; box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
+        h3 { font-size: 20px; color: #fff; margin-bottom: 20px; font-weight: 700; }
+        
+        label { font-size: 13px; color: #94a3b8; display: block; margin-bottom: 6px; font-weight: 500; }
+        input, select, textarea { width: 100%; padding: 12px; margin-bottom: 16px; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 10px; color: #fff; outline: none; font-size: 14px; }
+        select option { background-color: #0f172a; color: #fff; }
+
+        button { width: 100%; padding: 12px; background: linear-gradient(135deg, #6366f1, #3b82f6); color: white; border: none; border-radius: 10px; font-weight: 600; cursor: pointer; transition: 0.3s; box-shadow: 0 10px 20px rgba(99,102,241,0.3); }
+        button:hover { transform: translateY(-2px); box-shadow: 0 15px 25px rgba(99,102,241,0.5); }
+
+        .status-pill { padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: 700; display: inline-block; margin-right: 5px; }
+        .status-pending { background: rgba(234, 179, 8, 0.15); color: #facc15; border: 1px solid rgba(234, 179, 8, 0.3); }
+        .status-approved { background: rgba(52, 211, 153, 0.15); color: #34d399; border: 1px solid rgba(52, 211, 153, 0.3); }
+        .status-progress { background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); }
+
+        .doc-item { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); padding: 12px 16px; border-radius: 10px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; font-size: 14px; }
+    </style>
+</head>
+<body>
+
+    <div class="cyber-grid"></div>
+    <div class="orb-1"></div>
+    <div class="orb-2"></div>
+
+    <header>
+        <div class="logo">Unidesk <span>Student Portal</span></div>
+        <a href="/logout" class="logout-btn">Logout</a>
+    </header>
+
+    <div class="welcome-banner">
+        <div>
+            <h2>Welcome back, {{ user.name }}! 👋</h2>
+            <p>Manage your study abroad application, update personal details, and upload documents securely.</p>
+        </div>
+        <div>
+            {% if user.status == 'Active & Approved' %}
+                <span class="status-pill status-approved">Account: Active & Approved ✅</span>
+            {% else %}
+                <span class="status-pill status-pending">Account: {{ user.status }} ⏳</span>
+            {% endif %}
+            <span class="status-pill status-progress">Current Stage: {{ user.progress_status }}</span>
+        </div>
+    </div>
+
+    <div class="dashboard-grid">
+        <div class="card">
+            <h3>📝 Personal & Academic Details</h3>
+            <form method="POST">
+                <input type="hidden" name="update_profile" value="1">
+                <label>Full Name</label>
+                <input type="text" name="name" value="{{ user.name }}" required>
+
+                <label>Address</label>
+                <input type="text" name="address" value="{{ user.address }}" required>
+
+                <label>Date of Birth</label>
+                <input type="text" name="dob" value="{{ user.dob }}" required>
+
+                <label>Highest Education Qualification</label>
+                <input type="text" name="education" value="{{ user.education }}" required>
+
+                <label>Study History (When & Where Studied)</label>
+                <input type="text" name="study_history" value="{{ user.study_history }}" required>
+
+                <label>Target Country</label>
+                <input type="text" name="target_country" value="{{ user.target_country }}" required>
+
+                <label>Target Course</label>
+                <input type="text" name="target_course" value="{{ user.target_course }}" required>
+
+                <button type="submit">Update Details</button>
+            </form>
+        </div>
+
+        <div>
+            <div class="card">
+                <h3>📂 Certificate Upload</h3>
+                <form method="POST" enctype="multipart/form-data">
+                    <input type="hidden" name="upload_cert" value="1">
+                    <label>Select Document Type</label>
+                    <select name="doc_type" required>
+                        <option value="" disabled selected>Choose document</option>
+                        <option value="10th / 12th Marksheet">10th / 12th Marksheet</option>
+                        <option value="Degree Certificate">Degree Certificate / Transcripts</option>
+                        <option value="Passport Copy">Passport Copy</option>
+                        <option value="IELTS / TOEFL Scorecard">IELTS / TOEFL Scorecard</option>
+                    </select>
+
+                    <label>Upload File (PDF/Image)</label>
+                    <input type="file" name="certificate_file" required>
+
+                    <button type="submit">Upload Document</button>
+                </form>
+            </div>
+
+            <div class="card">
+                <h3>📋 Uploaded Files</h3>
+                {% if user.certificates %}
+                    {% for cert in user.certificates %}
+                    <div class="doc-item">
+                        <div>
+                            <strong>{{ cert.type }}</strong><br>
+                            <span style="font-size: 12px; color: #94a3b8;">{{ cert.filename }}</span>
+                        </div>
+                        <span style="font-size: 12px; color: #38bdf8;">{{ cert.status }}</span>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <p style="color: #94a3b8; font-size: 14px;">No documents uploaded yet.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Control - Unidesk International</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { background-color: #05050a; color: #fff; display: flex; justify-content: center; align-items: center; height: 100vh; overflow: hidden; position: relative; }
+
+        /* 3D Cyber Grid & Glow Background */
+        .cyber-grid { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background-image: linear-gradient(to right, rgba(239, 68, 68, 0.1) 1px, transparent 1px), linear-gradient(to bottom, rgba(239, 68, 68, 0.1) 1px, transparent 1px); background-size: 60px 60px; transform: perspective(500px) rotateX(60deg); transform-origin: top center; pointer-events: none; z-index: -2; opacity: 0.6; }
+        .orb-admin { position: absolute; width: 400px; height: 400px; background: #ef4444; filter: blur(160px); opacity: 0.2; z-index: -1; border-radius: 50%; }
+
+        .card { background: rgba(15, 15, 25, 0.75); border: 1px solid rgba(239, 68, 68, 0.3); padding: 40px; border-radius: 24px; width: 400px; backdrop-filter: blur(20px); box-shadow: 0 30px 60px rgba(0,0,0,0.8), 0 0 35px rgba(239, 68, 68, 0.2); position: relative; z-index: 10; }
+        
+        h2 { text-align: center; margin-bottom: 25px; color: #ef4444; font-weight: 800; font-size: 26px; }
+        
+        label { font-size: 13px; color: #94a3b8; display: block; margin-bottom: 6px; font-weight: 500; }
+        input { width: 100%; padding: 12px 16px; margin-bottom: 18px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; color: #fff; outline: none; font-size: 14px; transition: 0.3s; }
+        input:focus { border-color: #ef4444; box-shadow: 0 0 15px rgba(239, 68, 68, 0.3); }
+        
+        button { width: 100%; padding: 13px; background: linear-gradient(135deg, #ef4444, #dc2626); color: white; border: none; border-radius: 12px; font-weight: 600; cursor: pointer; transition: 0.3s; box-shadow: 0 10px 25px rgba(239,68,68,0.4); }
+        button:hover { transform: translateY(-2px); box-shadow: 0 15px 30px rgba(239,68,68,0.6); }
+        
+        .error { color: #f87171; font-size: 13px; text-align: center; margin-bottom: 15px; background: rgba(248, 113, 113, 0.1); padding: 8px; border-radius: 8px; }
+        .back-home { text-align: center; margin-top: 15px; font-size: 12px; }
+        .back-home a { color: #64748b; text-decoration: none; }
+        .back-home a:hover { color: #94a3b8; }
+    </style>
+</head>
+<body>
+
+    <div class="cyber-grid"></div>
+    <div class="orb-admin"></div>
+
+    <div class="card">
+        <h2>🔒 Admin Control</h2>
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
+        <form method="POST">
+            <label>Admin Username</label>
+            <input type="text" name="username" required placeholder="Enter username">
+            
+            <label>Admin Password</label>
+            <input type="password" name="password" required placeholder="••••••••">
+            
+            <button type="submit">Authenticate</button>
+        </form>
+        <div class="back-home">
+            <a href="/">← Back to Home</a>
+        </div>
+    </div>
+
+</body>
+</html>
